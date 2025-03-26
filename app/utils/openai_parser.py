@@ -1,12 +1,13 @@
 import os
 import json
-from openai import OpenAI
+import openai
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Set the OpenAI API key from environment variables
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def parse_query(user_input):
     try:
-        response = client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             temperature=0.2,
             messages=[
@@ -26,9 +27,11 @@ def parse_query(user_input):
             ]
         )
 
-        content = response.choices[0].message.content
+        # Extract the content from the AI response
+        content = response["choices"][0]["message"]["content"]
         print("🤖 AI Response:", content)
 
+        # Parse the returned JSON
         parsed = json.loads(content)
         return parsed.get("city", ""), parsed.get("state", ""), parsed.get("cuisine", ""), parsed.get("price", "")
 
