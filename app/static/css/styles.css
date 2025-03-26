@@ -1,0 +1,245 @@
+/* Base font: Inter */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #222;
+}
+
+/* Header */
+header {
+  background-color: #f5f5f5;
+  color: #111;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.tagline {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #666;
+}
+
+/* Main container */
+main {
+  padding: 2rem 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Form layout */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+/* Input and select styling */
+input,
+select,
+button {
+  padding: 0.75rem;
+  font-size: 1.125rem;
+  font-family: 'Inter', sans-serif;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fafafa;
+  color: #333;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #888;
+}
+
+/* Button styling */
+button {
+  background-color: #222;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #444;
+}
+
+.new-search-btn {
+  display: inline-block;
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.new-search-btn:hover {
+  background-color: #ddd;
+}
+
+/* Tom Select overrides */
+.tom-select,
+.ts-control,
+.ts-dropdown,
+.ts-dropdown .option {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1.125rem !important;
+  color: #222;
+}
+
+.tom-select .ts-control .item {
+  font-size: 1.125rem !important;
+  font-family: 'Inter', sans-serif !important;
+  padding: 0.25rem 0 !important;
+}
+
+.ts-control input {
+  font-size: 1.125rem !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* Restaurant card list */
+.restaurant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1rem;
+  background-color: #fafafa;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.card-content h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-content p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.card-content a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.card-content a:hover {
+  color: #000;
+}
+
+/* Responsive layout */
+@media (min-width: 768px) {
+  main {
+    max-width: 800px;
+  }
+
+  .card img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* Logo header styling */
+.logo-header {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.logo {
+  max-width: 260px;
+  width: 80%;
+  height: auto;
+  animation: fadeIn 1.2s ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+/* Alert styling */
+.alert-message {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 1rem;
+  border: 1px solid #ffeeba;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+/* About section styling */
+.about-section {
+  padding: 2rem 1rem;
+  background-color: #f9f9f9;
+  text-align: center;
+  color: #444;
+  font-size: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.about-section .tagline {
+  font-size: 1.25rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.about-section .about-description {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* NEW: Manual fields fix */
+#manual-fields label,
+#manual-fields input,
+#manual-fields select {
+  display: block;
+  width: 100%;
+}

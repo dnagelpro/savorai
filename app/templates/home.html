@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{{ url_for('results_bp.results') }}" method="POST">
+  <!-- AI Assistant Input -->
+  <label for="ai_query">Ask me where to eat:</label>
+  <input type="text" id="ai_query" name="ai_query" placeholder="e.g., I want vegan tacos in Austin">
+
+  <!-- Manual Input Fields -->
+  <div id="manual-fields">
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city">
+
+    <label for="state">State:</label>
+    <select id="state" name="state">
+      <option value="">Select a state</option>
+      {% for abbr, name in {
+        "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas", "CA": "California",
+        "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware", "FL": "Florida", "GA": "Georgia",
+        "HI": "Hawaii", "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa",
+        "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland",
+        "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi", "MO": "Missouri",
+        "MT": "Montana", "NE": "Nebraska", "NV": "Nevada", "NH": "New Hampshire", "NJ": "New Jersey",
+        "NM": "New Mexico", "NY": "New York", "NC": "North Carolina", "ND": "North Dakota",
+        "OH": "Ohio", "OK": "Oklahoma", "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island",
+        "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas", "UT": "Utah",
+        "VT": "Vermont", "VA": "Virginia", "WA": "Washington", "WV": "West Virginia", "WI": "Wisconsin",
+        "WY": "Wyoming"
+      }.items() %}
+        <option value="{{ abbr }}">{{ name }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="cuisine">Cuisine:</label>
+    <select id="cuisine" name="cuisine">
+      <option value="">Select a cuisine</option>
+      {% for cuisine in categories %}
+        <option value="{{ cuisine }}">{{ cuisine }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="price">Dining Style:</label>
+    <select id="price" name="price">
+      <option value="">Any</option>
+      <option value="1">$ - Budget</option>
+      <option value="2">$$ - Mid-range</option>
+      <option value="3">$$$ - Upscale</option>
+      <option value="4">$$$$ - Fine Dining</option>
+    </select>
+  </div>
+
+  <button type="submit">Search</button>
+</form>
+
+<!-- Toggle Manual Fields Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const aiInput = document.getElementById('ai_query');
+    const manualFields = document.getElementById('manual-fields');
+
+    function toggleManualFields() {
+      if (aiInput.value.trim().length > 0) {
+        manualFields.style.display = 'none';
+      } else {
+        manualFields.style.display = 'block';
+      }
+    }
+
+    aiInput.addEventListener('input', toggleManualFields);
+
+    // Run on page load
+    toggleManualFields();
+  });
+</script>
+{% endblock %}

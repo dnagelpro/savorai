@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Top {{ cuisine.title() }} spots in {{ city }}, {{ state }}</h2>
+
+<!-- Fallback message -->
+{% if message %}
+  <div class="alert-message">
+    {{ message }}
+  </div>
+{% endif %}
+
+<!-- New Search button -->
+<a href="{{ url_for('home_bp.home') }}" class="new-search-btn">← New Search</a>
+
+<!-- Show map only if there’s data -->
+{% if map_data %}
+  <div id="map" style="height: 400px; width: 100%; margin: 2rem 0; border-radius: 12px;"></div>
+
+  <!-- Google Maps Script -->
+  <script>
+    function initMap() {
+      const center = { lat: {{ map_data[0].lat }}, lng: {{ map_data[0].lng }} };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,
+        center: center,
+      });
+
+      const infoWindow = new google.maps.InfoWindow();
+
+      {% for marker in map_data %}
+        const marker{{ loop.index }} = new google.maps.Marker({
+          position: { lat: {{ marker.lat }}, lng: {{ marker.lng }} },
+          map,
+          title: "{{ marker.name }}"
+        });
+
+        marker{{ loop.index }}.addListener("click", () => {
+          infoWindow.setContent(`
+            <strong>{{ marker.name }}</strong><br>
+            {{ marker.address }}<br>
+            Rating: {{ marker.rating }} ★<br>
+            <a href="{{ marker.url }}" target="_blank">View on Yelp →</a>
+          `);
+          infoWindow.open(map, marker{{ loop.index }});
+        });
+      {% endfor %}
+    }
+  </script>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&callback=initMap">
+  </script>
+{% endif %}
+
+<!-- Restaurant cards -->
+<div class="restaurant-list">
+  {% for r in restaurants %}
+    <div class="card">
+      <img src="{{ r.image_url }}" alt="{{ r.name }} image">
+      <div class="card-content">
+        <h3>{{ r.name }}</h3>
+        <p>{{ r.rating }} ★ | {{ r.price or 'N/A' }}</p>
+        <p>{{ r.location.address1 }}, {{ r.location.city }}</p>
+        <p>Price: {{ r.price or 'N/A' }}</p>
+        <a href="{{ r.url }}" target="_blank">View on Yelp →</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<!-- Optional Styling -->
+<style>
+.alert-message {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 1rem;
+  border: 1px solid #ffeeba;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  font-size: 1rem;
+}
+
+.new-search-btn {
+  display: inline-block;
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.new-search-btn:hover {
+  background-color: #ddd;
+}
+</style>
+{% endblock %}

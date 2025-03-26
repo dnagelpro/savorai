@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SavorAI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon + Icons -->
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favicon-96x96.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='web-app-manifest-192x192.png') }}">
+  <link rel="icon" type="image/png" sizes="512x512" href="{{ url_for('static', filename='web-app-manifest-512x512.png') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+  <!-- Google Fonts: Inter only -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+  <!-- Tom Select CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+</head>
+<body>
+  
+  <header class="logo-header">
+    <img src="{{ url_for('static', filename='img/savorai-logo.png') }}" alt="SavorAI logo" class="logo">
+  </header>
+    
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="about-section">
+    <p class="about-description">SavorAI is your smart culinary companion for discovering the food you want at the price you want wherever your journey takes you.</p>
+    <p class="tagline">Savor the city. Savor the moment. Savor the food.</p>
+  </footer>
+  
+  <!-- Tom Select JS -->
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      new TomSelect('#cuisine', {
+        create: false,
+        sortField: { field: "text", direction: "asc" },
+        placeholder: "Start typing to find a cuisine..."
+      });
+
+      new TomSelect('#state', {
+        create: false,
+        sortField: { field: "text", direction: "asc" }
+      });
+
+      new TomSelect('#price', {
+        create: false,
+        sortField: { field: "text", direction: "asc" }
+      });
+    });
+  </script>
+</body>
+</html>
