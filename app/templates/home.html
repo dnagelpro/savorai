@@ -3,8 +3,10 @@
 {% block content %}
 <form action="{{ url_for('results_bp.results') }}" method="POST">
   <!-- AI Assistant Input -->
-  <label for="ai_query">Ask me where to eat:</label>
+  <label for="ai_query">Let SavorAI help you find a restaurant:</label>
   <input type="text" id="ai_query" name="ai_query" placeholder="e.g., I want vegan tacos in Austin">
+
+  <label> Or manually enter: </label>
 
   <!-- Manual Input Fields -->
   <div id="manual-fields">
